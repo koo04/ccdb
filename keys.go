@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"slices"
+	"strings"
 
 	badger "github.com/dgraph-io/badger/v4"
 	"github.com/rs/zerolog/log"
@@ -26,9 +27,13 @@ func keys(db *badger.DB, conn redcon.Conn, cmd redcon.Command) (any, error) {
 			opts.Prefix = []byte(cmd.Args[1])
 		}
 
+		if strings.Contains(string(cmd.Args[1]), "*") {
+			opts.Prefix = []byte(strings.ReplaceAll(string(cmd.Args[1]), "*", ""))
+		}
+
 		it := txn.NewIterator(opts)
 		defer it.Close()
-		for it.Rewind(); it.Valid(); it.Next() {
+		for it.Rewind(); it.Valid() || it.ValidForPrefix(opts.Prefix); it.Next() {
 			if bytes.Contains(it.Item().Key(), []byte("set::")) {
 				continue
 			}
