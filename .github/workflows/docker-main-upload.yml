@@ -1,5 +1,5 @@
 name: Docker Upload Main Branch
-run-name: ${{ github.actor }} is building and deploying to Docker Hub
+run-name: ${{ github.actor }} is building and deploying development branch to Docker Hub
 on:
   push:
     branches:
