@@ -20,4 +20,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ github.repository }}:${{ github.base_ref }}
+          tags: ${{ github.repository }}:${{ github.ref_name }}
