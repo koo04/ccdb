@@ -32,6 +32,7 @@ var commands = map[string]func(db *badger.DB, conn redcon.Conn, cmd redcon.Comma
 	"multi":    multi,
 	"echo":     echo,
 	"quit":     quit,
+	"exists":   exists,
 }
 
 var mu sync.RWMutex
