@@ -1,0 +1,3 @@
+log_level="debug"
+badger_file="cc.db"
+port=":6969"

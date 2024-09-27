@@ -11,11 +11,11 @@ import (
 )
 
 func keys(db *badger.DB, conn redcon.Conn, cmd redcon.Command) (any, error) {
-	log.Debug().Str("pattern", string(cmd.Args[1])).Msg("keys")
-
 	if len(cmd.Args) != 2 {
 		return nil, errors.New("ERR wrong number of arguments for 'KEYS' command")
 	}
+
+	log.Debug().Str("pattern", string(cmd.Args[1])).Msg("keys")
 
 	keys := []string{}
 	if err := db.View(func(txn *badger.Txn) error {

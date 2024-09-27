@@ -43,7 +43,7 @@ func init() {
 	SETTINGS.AddConfigPath(".")
 	SETTINGS.AddConfigPath("./config")
 	SETTINGS.AddConfigPath("/etc/ccdb")
-	SETTINGS.SetConfigName("ccdb")
+	SETTINGS.SetConfigName("config")
 
 	// Find and read the config file
 	if err := SETTINGS.ReadInConfig(); err != nil {

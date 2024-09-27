@@ -4,7 +4,8 @@ COPY . /src
 RUN go clean -modcache
 RUN go build
 
-FROM alpine:latest
+FROM ubuntu:latest
 COPY --from=builder /src/ccdb /usr/local/bin/ccdb
-EXPOSE 6379
+COPY --from=builder /src/config.example.toml /etc/ccdb/config.toml
+EXPOSE 6969
 ENTRYPOINT ["/usr/local/bin/ccdb"]
